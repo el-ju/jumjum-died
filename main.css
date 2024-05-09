@@ -1,0 +1,54 @@
+*{
+    margin: auto;
+  padding: 10px; 
+  text-align: center;
+  margin-top:20px;
+  background-color: #ffd1df;
+ 
+  font-family: "Shadows Into Light", cursive;
+  font-weight: 400;
+  font-style: normal;
+font-size:30PX;
+
+}
+  
+.jumjum{
+    border-top: 1.5px solid;
+    border-bottom: 1.5px solid;
+    width: 100%;
+    height: 100px ;
+}
+.mpkpeks p{
+    text-align: left;
+    margin-top: 0px;
+    padding: 0%;
+}
+.mpkpeks{
+    margin-top: 0%;
+    padding: 0%;
+}
+
+.heart img{
+   
+width: 180px;
+margin-bottom: 10%;
+margin-top: -100px;
+}
+.heart{
+    width: 200px;
+    /* height: 50px; */
+    padding: 0%;
+    margin-top: 0PX;
+    margin-left: 1422px;
+margin-bottom: 0px;
+
+
+
+}
+.akl{
+    width: 60%;
+    margin-top: -80px;
+}
+* h1{
+    font-size: 40px;
+}
