@@ -10,16 +10,11 @@
     
 }
 
-.jumjum
+.jumjum img 
 {
-    position: fixed;
-  inset: 0px;
-  width: 12rem;
-  height: 5rem;
-  max-width: 100vw;
-  max-height: 100dvh;
-  margin: auto;
-  margin-top: 320px;
+    width: 250px;
+    margin-right: 100px;
+  
 }
 .jumjum input
 {

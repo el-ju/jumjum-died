@@ -12,7 +12,7 @@
 <body>
     <script>
         function getMessages() {
-            fetch('https://saraha-4u83.onrender.com/message/664644369ccc4a521b3efb7f')
+            fetch(`https://saraha-4u83.onrender.com/message/${process.env._ID}`)
             .then(response => {
                 return response.json();
             })
@@ -33,9 +33,34 @@
             })
             .catch(error => console.error('Error:', error));
         }
-        getMessages();
-    </script>
+        function login()
+        {
+            const password = document.querySelector('#input').value;
+            if (password == process.env.PASSWORD)
+            {
+                document.querySelector('#input').style.display = 'none';
+                document.querySelector('#login').style.display = 'none';
+                document.querySelector('h1').style.display = 'none';
+                document.querySelector('#Refresh').style.display = 'block';
+                document.querySelector('#messages').innerHTML = '';
+                getMessages();
 
-    <p id="messages"></p>
+            }
+            else
+            {
+                document.querySelector('#messages').innerHTML = 'Incorrect password';
+            
+            }
+        }
+        login();
+    </script>
+        <div class = "jumjum">
+            
+            <h1>password</h1>
+            <input type="password" id="input">
+            <button onclick="login()" id="login">Login</button>
+            <p id="messages"></p>
+            <button onclick="getMessages()" id="Refresh" style="display: none;">Refresh</button>
+        </div>
     </body>
     </html>
