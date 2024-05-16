@@ -1,66 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="private.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <title>Document</title>
-</head>
-<body>
-    <script>
-        function getMessages() {
-            fetch(`https://saraha-4u83.onrender.com/message/${process.env._ID}`)
-            .then(response => {
-                return response.json();
-            })
-            .then(json => {
-                
-                const messages = json.messages;
-                const messagesDiv = document.querySelector('#messages');
-                messagesDiv.innerHTML = '';
-                if (!messages.length) {
-                    messagesDiv.innerHTML = 'No messages yet';
-                }
-                for (message of messages)
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="private.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            function getMessages() {
+                fetch(`https://saraha-4u83.onrender.com/message/`,
                 {
-                    const messageDiv = document.createElement('div');
-                    messageDiv.innerHTML = message.content;
-                    messagesDiv.appendChild(messageDiv);
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        }
-        function login()
-        {
-            const password = document.querySelector('#input').value;
-            if (password == process.env.PASSWORD)
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'accesstoken': localStorage.getItem('accesstoken')
+                    }
+                
+                })
+                .then(response => {
+                    return response.json();
+                })
+                .then(json => {
+                    const messages = json.messages;
+                    const messagesDiv = document.querySelector('#messages');
+                    messagesDiv.innerHTML = '';
+                    if (!messages.length) {
+                        messagesDiv.innerHTML = 'No messages yet';
+                    }
+                    for (message of messages)
+                    {
+                        const messageDiv = document.createElement('div');
+                        messageDiv.innerHTML = message.content;
+                        messagesDiv.appendChild(messageDiv);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            }
+            function login()
             {
-                document.querySelector('#input').style.display = 'none';
-                document.querySelector('#login').style.display = 'none';
-                document.querySelector('h1').style.display = 'none';
-                document.querySelector('#Refresh').style.display = 'block';
-                document.querySelector('#messages').innerHTML = '';
-                getMessages();
+                const email = document.querySelector('#email').value;
+                const password = document.querySelector('#password').value;
 
+                fetch('https://saraha-4u83.onrender.com/user/signin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        password,
+                        email
+                    })
+                })
+                .then(response => {return response.json();})
+                .then(json => {
+                    if (!json.success)
+                    {
+                        document.querySelector('#messages').innerHTML = 'Incorrect password';
+                        return;
+                    }
+                    localStorage.setItem('accesstoken', json.data.token);
+                    document.querySelector('#email').style.display = 'none';
+                    document.querySelector('#password').style.display = 'none';
+                    document.querySelector('h1').style.display = 'none';
+                    document.querySelector('h2').style.display = 'none';
+                    document.querySelector('#login').style.display = 'none';
+                    document.querySelector('#Refresh').style.display = 'block';
+                    getMessages();
+                })
             }
-            else
-            {
-                document.querySelector('#messages').innerHTML = 'Incorrect password';
-            
-            }
-        }
-        login();
-    </script>
+        </script>
         <div class = "jumjum">
             
-            <h1>password</h1>
-            <input type="password" id="input">
+            <h1>Email</h1>
+            <input type="email" id="email">
+            <h2>Password</h2>
+            <input type="password" id="password">
             <button onclick="login()" id="login">Login</button>
             <p id="messages"></p>
             <button onclick="getMessages()" id="Refresh" style="display: none;">Refresh</button>
         </div>
     </body>
-    </html>
+</html>
