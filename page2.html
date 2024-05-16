@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="second.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <title>Messages</title>
+</head>
+<body>
+    
+    <script>
+        function fun() {
+            content = document.getElementById('text').value;
+            fetch('https://saraha-4u83.onrender.com/message', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                sentTo: "664644369ccc4a521b3efb7f",
+                content
+            })
+        })
+        .then(response => response.json())
+        .then(json => location.reload())
+        .catch(error => console.error('Error:', error));
+        
+    }
+    </script>
+    
+    <div class="jumjum">
+        <p>Happy birthday to JUMJUM ❤</p>  
+        <h2>Send a message :)</h2>
+        <input type="text" id="text">
+        <button onclick="fun()">Send</button>
+    </div>
+</body>
+</html>
