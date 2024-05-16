@@ -9,3 +9,23 @@
     font-size:30PX;
     
 }
+
+.jumjum
+{
+    position: fixed;
+  inset: 0px;
+  width: 12rem;
+  height: 5rem;
+  max-width: 100vw;
+  max-height: 100dvh;
+  margin: auto;
+  margin-top: 320px;
+}
+.jumjum input
+{
+    margin-bottom: 10px;
+}
+#Refresh
+{
+    margin-left: 125px;
+}
