@@ -7,7 +7,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
-        <title>msg box</title>
+        <title>Document</title>
     </head>
     <body>
         <script>
@@ -31,10 +31,12 @@
                     if (!messages.length) {
                         messagesDiv.innerHTML = 'No messages yet';
                     }
+                    let cnt = 1;
                     for (message of messages)
                     {
-                        const messageDiv = document.createElement('div');
-                        messageDiv.innerHTML = message.content;
+                        const messageDiv = document.createElement('p');
+                        messageDiv.innerHTML = `${cnt}- ${message.content}`;
+                        cnt++;
                         messagesDiv.appendChild(messageDiv);
                     }
                 })
@@ -69,6 +71,7 @@
                     document.querySelector('h2').style.display = 'none';
                     document.querySelector('#login').style.display = 'none';
                     document.querySelector('#Refresh').style.display = 'block';
+                    document.querySelector('#messages').style.display = 'block';
                     getMessages();
                 })
             }
@@ -80,7 +83,8 @@
             <h2>Password</h2>
             <input type="password" id="password">
             <button onclick="login()" id="login">Login</button>
-            <p id="messages"></p>
+            <div id="messages" style="display: none;width:600px;height:150px;line-height:3em;overflow:scroll;padding:5px;border:4px double #000;margin-bottom: 10px;">
+            </div>
             <button onclick="getMessages()" id="Refresh" style="display: none;">Refresh</button>
         </div>
     </body>
